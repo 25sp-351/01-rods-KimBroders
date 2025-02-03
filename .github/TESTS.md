@@ -1,76 +1,105 @@
-Test #1:
-    command-line argument (rod length): 47
-    input (list of piece prices):
-        10, 100
-        5, 27
-        2, 3
+Test for running without -q or filename.
+    command-line argument: ./main.exe 
     expected output:
-        4 @ 10 = 400
-        1 @ 5 = 27
-        1 @ 2 = 3
-        Remainder: 0
-        Value: 430
+        Usage: C:\Users\kim\source\CPSC-351\01-rods-KimBroders\.github\main.exe [-q] <segment lengths filename>
 
-Test #2:
-    command-line argument (rod length): 10
-    input (list of piece prices):
+Test for running with -q but without filename.
+    command-line argument: ./main.exe -q
+    expected output:
+        Usage: C:\Users\kim\source\CPSC-351\01-rods-KimBroders\.github\main.exe [-q] <segment lengths filename>
+
+Test for reading an invalid file. 
+    command-line argument: ./main.exe bogusfile
+    expected output: Error open file bogusfile
+
+Test for invalid rod lengths.
+    command-line argument: ./main.exe data.txt
+    rod length inputs:
+        f
+        -1
+    expected output:
+        Enter rod length:
+        Invalid input: f
+
+        Enter rod length: -1
+        Invalid input: -1
+
+Test for rod length shorter than longest segment.
+    rod length: 10
+    segment lengths:
         5, 18
         10, 81
         16, 178
     expected output:
-        0 @ 5, = 0
-        1 @ 10 = 81
-        0 @ 16 = 0
-        Remainder: 0
-        Value: 81
-
-Test #3:
-    command-line argument (rod length): 25
-    input (list of piece prices):
-        3, 10
-        4, 14
-        5, 17
-        18, 184
-    expected output:
-        1 @ 3 = 10
-        1 @ 4 = 14
-        0 @ 5 = 0
-        1 @ 18 = 184
-        Remainder: 0
-        Value: 208
-
-Test #4:
-    command-line argument (rod length): 43
-    input (list of piece prices):
-        5, 24
-        8, 25
-        16, 226
-    expected output:
-        2 @ 5 = 48
-        0 @ 8 = 0
-        2 @ 16 = 452
-        Remainder: 1
-        Value: 500
-
-Test #5:
-    command-line argument (rod length): 66
-    input (list of piece prices):
-        3, 7
-        5, 24
-        16, 196
-    expected output:
-        0 @ 3 = 0
-        0 @ 5 = 0
-        4 @ 16 = 784
-        Remainder: 2
-        Value: 784
-
-Test #6:
-    command-line argument (rod length): 6
-    input (list of piece prices):
+        {
+        "input_length": 10,
+        "value": 81,
+        "remainder": 0,
+        "cuts": [
+        { "length": 5, "count": 0,
+        "piece_value": 18, "value": 0},
+        { "length": 10, "count": 1,
+        "piece_value": 81, "value": 81},
+        { "length": 16, "count": 0,
+        "piece_value": 178, "value": 0}
+        ] }
+        
+Test for rod length shorter than shortest segment.
+    rod length: 6
+    segment lengths:
         10, 73
     expected output:
         0 @ 10 = 0
         Remainder: 6
         Value: 0
-        
+    expected output:
+        {
+        "input_length": 6,
+        "value": 0,
+        "remainder": 6,
+        "cuts": [
+        { "length": 10, "count": 0,
+        "piece_value": 73, "value": 0}
+        ] }
+
+Test for use multiple smaller segments instead of one longer segment
+    rod length: 7
+    segment lengths:
+        3, 10
+        4, 14
+        5, 17
+    expected output:
+        {
+        "input_length": 7,
+        "value": 24,
+        "remainder": 0,
+        "cuts": [
+        { "length": 3, "count": 1,
+        "piece_value": 10, "value": 10},
+        { "length": 4, "count": 1,
+        "piece_value": 14, "value": 14},
+        { "length": 5, "count": 0,
+        "piece_value": 17, "value": 0}
+        ] }
+
+Test for general input
+    rod length: 47
+    segment lengths:
+        10, 100
+        5, 27
+        2, 3
+    expected output:
+        {
+        "input_length": 47,
+        "value": 430,
+        "remainder": 0,
+        "cuts": [
+        { "length": 10, "count": 4,
+        "piece_value": 100, "value": 400},
+        { "length": 5, "count": 1,
+        "piece_value": 27, "value": 27},
+        { "length": 2, "count": 1,
+        "piece_value": 3, "value": 3}
+        ] }
+
+Removed excessive tests.

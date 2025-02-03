@@ -19,4 +19,4 @@ debug: main.c
 	$(CC) $(CFLAGS) -o main.exe main.c -DDEBUG
 
 test: main.exe
-	./main.exe 66 < data.txt
+	./main.exe -q data.txt < rodlengths.txt > output.json

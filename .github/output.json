@@ -1,0 +1,14 @@
+{
+"input_length": 45,
+"value": 437,
+"remainder": 0,
+"cuts": [
+{ "length": 3, "count": 0,
+"piece_value": 7, "value": 0},
+{ "length": 4, "count": 2,
+"piece_value": 14, "value": 28},
+{ "length": 5, "count": 1,
+"piece_value": 17, "value": 17},
+{ "length": 16, "count": 2,
+"piece_value": 196, "value": 392}
+] }
